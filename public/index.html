@@ -10,53 +10,21 @@
 
 </head>
 <body class="container">
-    <h1>Minichat</h1>
+    <h1>Template</h1>
 
     <hr />
-    <form id="form">
-        <div class="row">
-            <div class="col-8">
-                <input type="text" id="message" class="form-control">
-            </div>
-            <div class="col-4">
-                <button type="submit" class="btn btn-info" id="btn-send">Enviar</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8">
-                <ul class="" id="messages" class="mt-2">
-                    
-                </ul>
-            </div>
-        </div>
-
-    </form>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js" integrity="sha512-Jr0UIR/Q8MUX+93zjDOhuDUKLqJZObtwpkLJQcR9qMaLgL0thet39IORuavUaZFkZ8a4ktrUsKPM9mf5LWMduA==" crossorigin="anonymous"></script>
     <script>
-        const socket = io("https://react-socket-server-jp.herokuapp.com/")
+        // const socket = io("https://react-socket-server-jp.herokuapp.com/")
+        const socket = io("http://localhost:8080")
 
-        const form = document.querySelector("#form")
-        const message = document.querySelector("#message")
-        const messages = document.querySelector("#messages")
 
-        form.addEventListener("submit",(e)=>{
-            e.preventDefault()
-            const msg = message.value
-
-            socket.emit("message",{texto:msg})
+        socket.on("connect",()=>{
+            console.log('conectado')
         })
 
-        socket.on("message",(message)=>{
-            console.log('message',message)
-        })
-        socket.on("message-from-server",(message)=>{
-
-            messages.innerHTML+=`<li>${message.texto}</li>`
-
-            console.log('message-from-server',message)
-        })
         
 
     </script>
